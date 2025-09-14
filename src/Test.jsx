@@ -53,13 +53,21 @@ const Header = function () {
 };
 const Menu = function () {
   return (
-    <div className="menu">
+    <main className="menu">
       <h2>Our menu</h2>
       <p>
         Authentic Italian cuisine. 6 creative dishes to choose from. All from
         our stone oven, all organic, all delicious.
       </p>
-    </div>
+      <ul className="pizzas">
+        <Pizza />
+        <Pizza />
+        <Pizza />
+        <Pizza />
+        <Pizza />
+        <Pizza />
+      </ul>
+    </main>
   );
 };
 
@@ -67,23 +75,50 @@ import focaccia from './assets/focaccia.jpg';
 
 const Pizza = function () {
   return (
-    <div>
+    <li className="pizza">
       <img src={focaccia} alt="Focaccia" />
-      <h2>Focaccia</h2>
-      <p>Bread with italian olive oil and rosemary</p>
-    </div>
+      <div>
+        <h3>Focaccia</h3>
+        <p>Bread with italian olive oil and rosemary</p>
+        <span>Price: $6</span>
+      </div>
+    </li>
   );
 };
 
 const Footer = function () {
+  const restaurantOpen = () => {
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    // const isOpen = hour >= openHour && hour <= closeHour;
+    // console.log(isOpen);
+    hour >= openHour && hour <= closeHour
+      ? `We are currently open`
+      : `We're open from 12:00 to 22:00. Come visit us or order online.`;
+  };
+  // const hour = new Date().getHours();
+  // const openHour = 12;
+  // const closeHour = 22;
+  // const isOpen = hour >= openHour && hour <= closeHour;
+  // console.log(isOpen);
+  // hour >= openHour && hour <= closeHour
+  //   ? `We are currently open`
+  //   : `We're open from 12:00 to 22:00. Come visit us or order online.`;
+
+  // const anotherStyle = { color: 'red', fontSize: '20px' };
   return (
     <footer className="footer">
       <div className="order">
         <p>We're open from 12:00 to 22:00. Come visit us or order online.</p>
+        {/* <p style={{ color: 'red', fontSize: '20px' }}>
+          We're open from 12:00 to 22:00. Come visit us or order online.
+        </p> */}
+        {/* <p style={anotherStyle}>Lorem ipsum dolor sit amet.</p> */}
         <button className="btn">Order</button>
       </div>
     </footer>
   );
 };
 
-export { Header, Menu, Pizza, Footer };
+export { Header, Menu, Footer };

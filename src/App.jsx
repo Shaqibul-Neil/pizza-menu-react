@@ -1,16 +1,13 @@
 import './App.css';
-import { Header, Menu, Pizza, Footer } from './Test';
+import { Header, Menu, Footer } from './Test';
 
 function App() {
   return (
-    <>
+    <div className="container">
       <Header />
       <Menu />
-      <Pizza />
-      <Pizza />
-      <Pizza />
       <Footer />
-    </>
+    </div>
   );
 }
 
