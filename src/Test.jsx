@@ -44,9 +44,28 @@ const pizzaData = [
   },
 ];
 
+const Header = function () {
+  return (
+    <header className="header">
+      <h1>Fast React Pizza Co.</h1>
+    </header>
+  );
+};
+const Menu = function () {
+  return (
+    <div className="menu">
+      <h2>Our menu</h2>
+      <p>
+        Authentic Italian cuisine. 6 creative dishes to choose from. All from
+        our stone oven, all organic, all delicious.
+      </p>
+    </div>
+  );
+};
+
 import focaccia from './assets/focaccia.jpg';
 
-function Pizza() {
+const Pizza = function () {
   return (
     <div>
       <img src={focaccia} alt="Focaccia" />
@@ -54,10 +73,17 @@ function Pizza() {
       <p>Bread with italian olive oil and rosemary</p>
     </div>
   );
-}
-
-const Tests = () => {
-  return <h1>Hello React! My Pizza</h1>;
 };
 
-export { Pizza, Tests };
+const Footer = function () {
+  return (
+    <footer className="footer">
+      <div className="order">
+        <p>We're open from 12:00 to 22:00. Come visit us or order online.</p>
+        <button className="btn">Order</button>
+      </div>
+    </footer>
+  );
+};
+
+export { Header, Menu, Pizza, Footer };

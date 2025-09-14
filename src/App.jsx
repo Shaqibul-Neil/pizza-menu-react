@@ -1,13 +1,15 @@
 import './App.css';
-import { Pizza, Tests } from './Test';
+import { Header, Menu, Pizza, Footer } from './Test';
 
 function App() {
   return (
     <>
-      <Tests />
+      <Header />
+      <Menu />
       <Pizza />
       <Pizza />
       <Pizza />
+      <Footer />
     </>
   );
 }
