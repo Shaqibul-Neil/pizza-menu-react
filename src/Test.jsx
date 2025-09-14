@@ -51,6 +51,7 @@ const Header = function () {
     </header>
   );
 };
+//Menu হলো Parent component, কারণ সে <Pizza /> কে নিজের JSX-এর ভেতরে ব্যবহার করছে। Pizza হলো Child component, কারণ সে parent (Menu) থেকে data props আকারে পাচ্ছে।
 const Menu = function () {
   return (
     <main className="menu">
@@ -60,27 +61,50 @@ const Menu = function () {
         our stone oven, all organic, all delicious.
       </p>
       <ul className="pizzas">
-        <Pizza />
-        <Pizza />
-        <Pizza />
-        <Pizza />
-        <Pizza />
-        <Pizza />
+        <Pizza //passing the props which is information about the pizza which will be like an object in props React এই props গুলো bundle করে child Pizza component এ পাঠায় একটা object আকারে: এটাকে বলে Unidirectional data flow — মানে data শুধু parent → child এ যায়। Child চাইলে props এর ভেতর data change করতে পারে না (props read-only)।
+          name="Focaccia"
+          ingredients="Bread with italian olive oil and rosemary"
+          price={6} //whenever we want to pass anything that is not string we pass it in js mode {} inside it 6 will be number
+          photoName="pizzas/focaccia.jpg"
+        />
+        <Pizza
+          name="Pizza Margherita"
+          ingredients="Tomato and mozzarella"
+          price={10}
+          photoName="pizzas/margherita.jpg"
+        />
       </ul>
     </main>
   );
 };
-
+//importing all images focaccia এখন একটা variable, যার ভ্যালু হলো ওই ইমেজের path
 import focaccia from './assets/focaccia.jpg';
+import margherita from './assets/margherita.jpg';
+import spinaci from './assets/spinaci.jpg';
+import funghi from './assets/funghi.jpg';
+import salamino from './assets/salamino.jpg';
+import prosciutto from './assets/prosciutto.jpg';
 
-const Pizza = function () {
+//making an image object এটা basically একটা lookup table বানানো হয়েছে — যাতে photoName (string) আর import করা variable (value) এর মধ্যে mapping থাকে:
+const images = {
+  'pizzas/focaccia.jpg': focaccia,
+  'pizzas/margherita.jpg': margherita,
+  'pizzas/spinaci.jpg': spinaci,
+  'pizzas/funghi.jpg': funghi,
+  'pizzas/salamino.jpg': salamino,
+  'pizzas/prosciutto.jpg': prosciutto,
+};
+
+//giving the parameter props which will take the values passed in the pizzas
+const Pizza = function (props) {
+  console.log(props); //like an object
   return (
     <li className="pizza">
-      <img src={focaccia} alt="Focaccia" />
+      <img src={images[props.photoName]} alt={props.name} />
       <div>
-        <h3>Focaccia</h3>
-        <p>Bread with italian olive oil and rosemary</p>
-        <span>Price: $6</span>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>Price: ${props.price + 3}</span>
       </div>
     </li>
   );
