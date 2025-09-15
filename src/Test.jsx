@@ -61,7 +61,16 @@ const Menu = function () {
         our stone oven, all organic, all delicious.
       </p>
       <ul className="pizzas">
-        <Pizza //passing the props which is information about the pizza which will be like an object in props React এই props গুলো bundle করে child Pizza component এ পাঠায় একটা object আকারে: এটাকে বলে Unidirectional data flow — মানে data শুধু parent → child এ যায়। Child চাইলে props এর ভেতর data change করতে পারে না (props read-only)।
+        {pizzaData.map(pizza => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+          // <Pizza
+          //   name={pizza.name}
+          //   ingredients={pizza.ingredients}
+          //   price={pizza.price}
+          //   photoName={pizza.photoName}
+          // />
+        ))}
+        {/* <Pizza //passing the props which is information about the pizza which will be like an object in props React এই props গুলো bundle করে child Pizza component এ পাঠায় একটা object আকারে: এটাকে বলে Unidirectional data flow — মানে data শুধু parent → child এ যায়। Child চাইলে props এর ভেতর data change করতে পারে না (props read-only)।
           name="Focaccia"
           ingredients="Bread with italian olive oil and rosemary"
           price={6} //whenever we want to pass anything that is not string we pass it in js mode {} inside it 6 will be number
@@ -72,7 +81,7 @@ const Menu = function () {
           ingredients="Tomato and mozzarella"
           price={10}
           photoName="pizzas/margherita.jpg"
-        />
+        /> */}
       </ul>
     </main>
   );
@@ -97,14 +106,14 @@ const images = {
 
 //giving the parameter props which will take the values passed in the pizzas
 const Pizza = function (props) {
-  console.log(props); //like an object
+  //console.log(props); //like an object
   return (
     <li className="pizza">
-      <img src={images[props.photoName]} alt={props.name} />
+      <img src={images[props.pizzaObj.photoName]} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>Price: ${props.price + 3}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>Price: ${props.pizzaObj.price + 3}</span>
       </div>
     </li>
   );
@@ -117,9 +126,9 @@ const Footer = function () {
     const closeHour = 22;
     // const isOpen = hour >= openHour && hour <= closeHour;
     // console.log(isOpen);
-    hour >= openHour && hour <= closeHour
-      ? `We are currently open`
-      : `We're open from 12:00 to 22:00. Come visit us or order online.`;
+    return hour >= openHour && hour <= closeHour
+      ? `We are currently open until ${closeHour}:00`
+      : `We're open from ${openHour}:00 to ${closeHour}:00. Come visit us or order online.`;
   };
   // const hour = new Date().getHours();
   // const openHour = 12;
@@ -134,7 +143,7 @@ const Footer = function () {
   return (
     <footer className="footer">
       <div className="order">
-        <p>We're open from 12:00 to 22:00. Come visit us or order online.</p>
+        <p>{restaurantOpen()}</p>
         {/* <p style={{ color: 'red', fontSize: '20px' }}>
           We're open from 12:00 to 22:00. Come visit us or order online.
         </p> */}
