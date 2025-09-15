@@ -126,7 +126,8 @@ const images = {
 
 //giving the parameter props which will take the values passed in the pizzas
 const Pizza = function (props) {
-  //console.log(props); //like an object
+  console.log(props); //like an object
+  if (props.pizzaObj.soldOut) return null;
   return (
     <li className="pizza">
       <img src={images[props.pizzaObj.photoName]} alt={props.pizzaObj.name} />
